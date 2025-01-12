@@ -1,65 +1,21 @@
 # DataInf: Efficiently Estimating Data Influence in LoRA-tuned LLMs and Diffusion Models
 
-We provide a codebase for "[DataInf: Efficiently Estimating Data Influence in LoRA-tuned LLMs and Diffusion Models](https://arxiv.org/abs/2310.00902)" accepted at ICLR 2024. DataInf is an efficient influence approximation method that is practical for large-scale generative AI models such as LLMs or stable diffusion models. DataInf leverages an easy-to-compute closed-form expression, outperforming existing influence computation algorithms in terms of computational and memory efficiency.
+This is a changed codebase for "[DataInf: Efficiently Estimating Data Influence in LoRA-tuned LLMs and Diffusion Models](https://arxiv.org/abs/2310.00902)" which includes Appendix F experiment of the paper.
 
-<p align="center">
-<img src="./figures/llama-diffusion-new.png" width="800">
-</p>
+Original Codebase is [Here](https://github.com/ykwon0407/DataInf).
 
 
 ## Quick start 
+1. Zip the whole repository.
+2. Upload it as Dataset to Kaggle.
+3. Create a New Notebook.
+4. Import any of the notebooks by dataset from Folder "assignedTaskNotebooks".
+5. Add the created Dataset as the input of the notebook.
+6. Run all.
 
-### (Task 1) Mislabeled data detection
+## Cite the paper
 
-An easy-to-start Jupyter notebook `notebooks/Mislabeled_Data_Detection-RoBERTa-MRPC.ipynb` demonstrates how to compute the influence function values and how to detect mislabeled data points using the computed influence function values. 
- - We use the RoBERTa-large model and [LoRA](https://arxiv.org/abs/2106.09685), a parameter-efficient fine-tuning technique, to significantly reduce the total number of parameters. 
- - We consider a noisy version of the GLUE-MRPC dataset; We synthetically generate mislabeled data points by flipping the label of data points. We randomly selected 20% of data points. 
-
-### (Task 2) Influential data identification 
-A Jupyter notebook `notebooks/Influential_Data_Identification-Llama2-Math-Reason.ipynb` demonstrates how to efficiently compute the influence function values, showing its applications to identify most influential data points. We use the [llama2-13b-chat](https://huggingface.co/meta-llama/Llama-2-13b-chat-hf). It has the following steps.
-
-- **Step 1** Dataset generation: generate the `math_problem (with reasoning)` dataset with the following bash command. It will be stored at the `datasets` folder. 
-```
-python3 src/generate_sentence-math_datasets.py
-```
-It will generate the `sentence_transformation` and math_problem (without reasoning) datasets as well.
-
-- **Step 2** Fine-tune a model: fine-tune a llama-2-13b-chat model on the `math problem (with reasoning)` dataset. We use `src/sft_trainer.py`, which is built on HuggingFace's [SFTTrainer](https://github.com/huggingface/trl/blob/main/examples/scripts/sft.py). A sample CLI is given as follows.
-```
-python /YOUR-DATAINF-PATH/DataInf/src/sft_trainer.py \
-    --model_name /YOUR-LLAMA-PATH/llama/models_hf/llama-2-13b-chat \
-    --dataset_name /YOUR-DATAINF-PATH/DataInf/datasets/math_with_reason_train.hf \
-    --output_dir /YOUR-DATAINF-PATH/DataInf/models/math_with_reason_13bf \
-    --dataset_text_field text \
-    --load_in_8bit \
-    --use_peft
-```
-
-- **Step 3** Compute the gradients and influence function values.
-
-
-## The core python file 
-
-- `dataloader.py` includes the construction of tokenizers and generates noisy datasets.
-
-- `lora_model.py` includes LoRA modules.
-
-- `influence.py` includes influence computation algorithms.
-
-- `generate_sentence-math_datasets.py` generates the sentence_transformation and the math problem datasets.
-
-
-## CLI tool for mislabeled data detection tasks
-
-We also provide a CLI tool. The following command will compute the influence function values of the GLUE-QNLI dataset. It uses the RoBERTa-large model and the LoRA rank is set to 8.
-
-```
-python3 launcher.py run --exp_id='config_qnli4' --run-id=0 --runpath='./'
-```
-
-## Cite Us
-
-If you found the library or the paper useful, please cite us!
+If you found the library or the paper useful, please cite the authors.
 ```
 @article{kwon2023datainf,
   title={Datainf: Efficiently estimating data influence in lora-tuned llms and diffusion models},
