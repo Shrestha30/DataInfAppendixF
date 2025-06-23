@@ -77,3 +77,33 @@ def compute_grad_distances(grad_dict, grad_dict_avg):
 euclidean_idxs = find_idxs(compute_grad_distances(grads_dict, get_grads_avg(data.x_val, data.y_val)))
     euclidean_list = [1 if i in euclidean_idxs else 0 for i in range(data.x_train.shape[0])]
     print(sum(euclidean_list))
+
+
+
+import matplotlib.pyplot as plt
+
+    # Assuming these are your arrays
+    grad_distances = compute_grad_distances(grads_dict, get_grads_avg(data.x_val, data.y_val))
+    accurate_scores = inf_eng.IF_dict['accurate']
+
+    # Sort indices based on ascending values of grad_distances
+    sorted_indices = np.argsort(grad_distances)
+
+    # Apply the sorted indices to both arrays
+    grad_distances_sorted = grad_distances[sorted_indices]
+    accurate_scores_sorted = accurate_scores[sorted_indices]
+
+
+    # Create the plot
+    plt.figure(figsize=(10, 5))
+    plt.plot(grad_distances, color='blue', label='Gradient Distance')
+    plt.plot(accurate_scores, color='red', label='Accurate Scores')
+
+    plt.xlabel('Sample Index')
+    plt.ylabel('Value')
+    plt.title('Gradient Distance vs Accurate Scores')
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    # plt.show()
+    plt.savefig('gradient_vs_accurate.png', dpi=300)
