@@ -11,3 +11,4 @@ transformers==4.34.0.dev0
 
 Q1.1: Our Bangla-specific hate speech explanation model supports transparency and accountability in automated moderation. By generating native-language explanations, it empowers content moderators to make more informed decisions and helps researchers and civic institutions better understand culturally specific expressions of hate. This enhances fairness and inclusivity in multilingual NLP systems.
 Q1.2: : We focused on subjective human ratings to assess nuanced aspects of explanations—like persuasiveness and soundness—that current automatic metrics struggle to capture, especially given their limited sensitivity to cultural distinctions.
+Q1.3: The 1,000 samples used for fine-tuning were drawn from the training and validation splits of the Bd-SHS dataset. In contrast, for 60 explanations evaluated by participants, the texts were curated exclusively from the test set, ensuring no overlap and maintaining an unbiased evaluation.
