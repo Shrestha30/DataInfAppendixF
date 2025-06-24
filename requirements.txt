@@ -20,3 +20,6 @@ Justify the selection of untuned Mistral as a baseline: Were alternative baselin
 Just a sample answer, you could use or deny it: Yes we have tried BanglaT5, but it fails to generate proper explanation with only 1000 samples. Among the explored tasks by Bangla T5, most similar tasks to ours are "Question Answering" and "Multi-tun dialog". Both of which have an average training size of 100k. Moreover Mistral instruct model we used was already trained for such tasks whereareas, Bangla T5 were not.
 Q3.2: BanHRE expert Demographics: linguistic expert, male, Bangla mother tongue, with more than 10 years of experience in explaining various Bangla texts for research-based validation. Professional experience include Assistant Professor, Software Engineer, Data Scientist, Research Scientist etc.
       Annotation protocols: conv
+
+
+Q4.1: By "holdout method," we refer to the train/validation/test split finetuning provided by the Bd-SHS dataset, which follows an 80:10:10 ratio.
